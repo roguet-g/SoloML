@@ -19,5 +19,7 @@ df['target'] = cancer_data['target']
 X = df[cancer_data.feature_names].values
 y = df['target'].values
 
-model = LogisticRegression()
+model = LogisticRegression(solver='liblinear')
 model.fit(X,y)
+model.predict([X[0]])
+print(model.score(X,y))
