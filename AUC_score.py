@@ -9,7 +9,7 @@ df['male'] = df['Sex'] == 'male'
 X = df[['Pclass', 'male', 'Age', 'Siblings/Spouses','Parents/Children']]
 y = df['Survived'].values
 
-X_train, X_test, y_train, y_test = train_test_split(X,y)
+X_train, X_test, y_train, y_test = train_test_split(X,y,random_state=5)
 
 model = LogisticRegression()
 model.fit(X_train, y_train)
@@ -18,7 +18,7 @@ y_pred_proba_1 = model.predict_proba(X_test)
 print('model 1 AUC score', roc_auc_score(y_test, y_pred_proba_1[:,1]))
 
 model2 = LogisticRegression()
-model2.fit(X_train[:,0:2], y_train)
-y_pred_proba_2 = model2.predict_proba(X_test[:,0:2])
+model2.fit(X_train.iloc[:,0:4], y_train)
+y_pred_proba_2 = model2.predict_proba(X_test.iloc[:,0:4])
 
 print('model 2 AUC score ', roc_auc_score(y_test, y_pred_proba_2[:,1]))
